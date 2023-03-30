@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\v1\LoginRequest;
+use App\Models\User;
 use App\Services\LoginService;
 use Illuminate\Http\JsonResponse;
 
@@ -32,5 +33,16 @@ class AdminAuthController extends Controller
             return $this->jsonResponse([], 401, 0, 'Failed to authenticate user');
         }
 
+    }
+
+    public function logout(): JsonResponse
+    {
+        $user_id = session('uuid');
+        auth()->logout();
+
+        if(User::deleteToken($user_id))
+            return $this->jsonResponse([]);
+
+        return $this->jsonResponse([], 401, 0, 'Invalid token');
     }
 }

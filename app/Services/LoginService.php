@@ -14,9 +14,8 @@ class LoginService {
     {
         $payload = [
             'iss' => env('APP_URL'),
-            'aud' => $user->uuid,
-            'iat' => time(),
             'exp' => time() * self::MAX_TIME,
+            'user_uuid' => $user->uuid,
         ];
 
         $token = JWT::encode($payload, env('JWT_PRIVATE'), self::ALLOWED_ALGOS);

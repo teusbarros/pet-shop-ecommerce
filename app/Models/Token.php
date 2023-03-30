@@ -25,4 +25,9 @@ class Token extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'uuid');
     }
+
+    public static function validatePayload($token): bool
+    {
+        return (new static)::where('unique_id', $token)->count() == 1;
+    }
 }

@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\API\v1\AdminAuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\v1\APIMiddleware;
 
-Route::group(['prefix' => 'v1'], function () {
-    Route::group(['prefix' => 'admin'], function (){
-        Route::post('login', [AdminAuthController::class, 'login'])->name('login');
+Route::post('/v1/admin/login', [AdminAuthController::class, 'login']);
+
+Route::middleware([APIMiddleware::class])->group(function () {
+    Route::group(['prefix' => 'v1/admin'], function (){
+        Route::get('logout', [AdminAuthController::class, 'logout']);
     });
 });
