@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -48,8 +49,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function updateToken(String $token): void
+    public function token(): HasOne
     {
-        #todo: store token into database
+        return $this->hasOne(Token::class, 'user_id', 'uuid');
+    }
+    public function updateToken(string $new_token): void
+    {
+        $token = $this->token;
+
+        if (!$token){
+            $token = new Token();
+            $token->user_id = $this->uuid;
+            $token->token_title = $this->first_name;
+        }
+        $token->unique_id = $new_token;
+        $token->save();
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\v1\LoginRequest;
 use App\Services\LoginService;
+use Illuminate\Http\JsonResponse;
 
 class AdminAuthController extends Controller
 {
@@ -17,7 +18,7 @@ class AdminAuthController extends Controller
     }
 
 
-    public function login(LoginRequest $request): string
+    public function login(LoginRequest $request): JsonResponse
     {
         $credentials = $request->only('email', 'password');
         $credentials['is_admin'] = true;
