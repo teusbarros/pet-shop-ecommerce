@@ -61,4 +61,16 @@ class AdminController extends Controller
 
         return $this->jsonResponse(new UserResource($user));
     }
+
+    public function destroy(User $user): JsonResponse
+    {
+        if ($user->is_admin){
+            return $this->jsonResponse([], 403, 0, 'Unauthorized: Not enough privileges');
+        }
+
+        $user->token?->delete();
+        $user->delete();
+
+        return $this->jsonResponse([], 200, 1);
+    }
 }
