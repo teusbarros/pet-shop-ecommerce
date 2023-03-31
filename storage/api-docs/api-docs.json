@@ -380,6 +380,324 @@
                     }
                 ]
             }
+        },
+        "/api/v1/user/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Login a User account",
+                "operationId": "d6a7f4ab3970a37d3b82e3ff3ec02ddc",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "description": "User email",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "User password",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/v1/user/logout": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Logout a User account",
+                "operationId": "91e16533e278e9a783e805b5589c83ee",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/user": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "View a User account",
+                "operationId": "2ad6cf73871779ea6f0212881b4fbf47",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Delete a User account",
+                "operationId": "c2d5739e9d9bbc83372f0bae9dc7ae5b",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/user/create": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Create a User account",
+                "operationId": "cbb01be368a0a0b2dd875a2d9f8f66da",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "first_name",
+                                    "last_name",
+                                    "email",
+                                    "password",
+                                    "password_confirmation",
+                                    "avatar",
+                                    "address",
+                                    "phone_number"
+                                ],
+                                "properties": {
+                                    "first_name": {
+                                        "description": "User first name",
+                                        "type": "string"
+                                    },
+                                    "last_name": {
+                                        "description": "User last name",
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "description": "User email",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "User password",
+                                        "type": "string"
+                                    },
+                                    "password_confirmation": {
+                                        "description": "User password",
+                                        "type": "string"
+                                    },
+                                    "avatar": {
+                                        "description": "Avatar image UUID",
+                                        "type": "string"
+                                    },
+                                    "address": {
+                                        "description": "User main address",
+                                        "type": "string"
+                                    },
+                                    "phone_number": {
+                                        "description": "User main phone number",
+                                        "type": "string"
+                                    },
+                                    "marketing": {
+                                        "description": "User marketing preferences",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/user/edit": {
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update a User account",
+                "operationId": "6cb3533c128a12b7245939d169c351ad",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "first_name",
+                                    "last_name",
+                                    "email",
+                                    "password",
+                                    "password_confirmation",
+                                    "address",
+                                    "phone_number"
+                                ],
+                                "properties": {
+                                    "first_name": {
+                                        "description": "User first name",
+                                        "type": "string"
+                                    },
+                                    "last_name": {
+                                        "description": "User last name",
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "description": "User email",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "User password",
+                                        "type": "string"
+                                    },
+                                    "password_confirmation": {
+                                        "description": "User password",
+                                        "type": "string"
+                                    },
+                                    "avatar": {
+                                        "description": "Avatar image UUID",
+                                        "type": "string"
+                                    },
+                                    "address": {
+                                        "description": "User main address",
+                                        "type": "string"
+                                    },
+                                    "phone_number": {
+                                        "description": "User main phone number",
+                                        "type": "string"
+                                    },
+                                    "marketing": {
+                                        "description": "User marketing preferences",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
