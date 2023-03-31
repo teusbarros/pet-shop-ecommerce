@@ -7,11 +7,12 @@ use App\Http\Requests\v1\CreateUserRequest;
 use App\Http\Requests\v1\EditUserRequest;
 use App\Http\Resources\v1\UserResource;
 use App\Models\User;
+use App\Services\GetUserByTokenService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-class UserController extends Controller
+final class UserController extends Controller
 {
     /**
      * @OA\Get(
@@ -43,8 +44,11 @@ class UserController extends Controller
      */
     public function show(): JsonResponse
     {
-        $user_id = session('uuid');
-        $user = User::whereUuid($user_id)->firstOrFail();
+        $user = GetUserByTokenService::get();
+
+        if (! $user) {
+            return $this->jsonResponse([], 401, 0, 'Unauthorized');
+        }
         return $this->jsonResponse(new UserResource($user), 200, 1);
     }
 

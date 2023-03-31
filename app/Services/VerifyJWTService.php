@@ -7,7 +7,7 @@ use Firebase\JWT\ExpiredException;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-class VerifyJWTService
+final class VerifyJWTService
 {
     public const ALLOWED_ALGOS = 'RS256';
 

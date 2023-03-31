@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /** @phpstan-consistent-constructor */
-class Token extends Model
+final class Token extends Model
 {
     use HasFactory;
     protected $table = 'jwt_tokens';
@@ -32,6 +32,6 @@ class Token extends Model
 
     public static function validatePayload(string $token): bool
     {
-        return Token::where('unique_id', $token)->count() == 1;
+        return Token::where('unique_id', $token)->count() === 1;
     }
 }

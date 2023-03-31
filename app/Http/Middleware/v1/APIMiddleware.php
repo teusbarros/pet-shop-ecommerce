@@ -6,10 +6,11 @@ use App\Services\VerifyJWTService;
 use App\Traits\DefaultResponse;
 use Closure;
 use Firebase\JWT\ExpiredException;
-use UnexpectedValueException;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-class APIMiddleware
+use UnexpectedValueException;
+
+final class APIMiddleware
 {
     use DefaultResponse;
     public function handle(Request $request, Closure $next): Response

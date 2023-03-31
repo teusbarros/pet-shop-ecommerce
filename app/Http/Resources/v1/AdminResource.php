@@ -7,7 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 /** @mixin \App\Models\User */
 
-class AdminResource extends JsonResource
+final class AdminResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

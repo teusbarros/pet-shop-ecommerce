@@ -15,6 +15,7 @@ trait DefaultResponse
      * @param string|null $error
      * @param array<mixed> $errors
      * @param array<mixed> $extra
+     *
      * @return JsonResponse
      */
     public function jsonResponse(array|null|AdminResource|UserResource $data, int $code = 200, int $success = 1, string $error = null, array $errors = [], array $extra = []): JsonResponse
@@ -24,7 +25,7 @@ trait DefaultResponse
             'data' => $data,
             'error' => $error,
             'errors' => $errors,
-            'extra' => $extra
+            'extra' => $extra,
         ], $code);
     }
 }

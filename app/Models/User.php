@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+final class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
@@ -51,19 +51,6 @@ class User extends Authenticatable
     ];
 
     /**
-     * The "booted" method of the model.
-     */
-    protected static function booted(): void
-    {
-        static::created(function (User $user): void
-        {
-            // create user jwt token
-            $loginService = new LoginService();
-            $loginService->excecute($user);
-        });
-    }
-
-    /**
      * @param Builder<User> $query
      *
      * @return void
@@ -93,6 +80,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(Token::class, 'user_id', 'uuid');
     }
+    public function isAdmin(): bool
+    {
+        return $this->is_admin == 1;
+    }
     public function updateToken(string $new_token): void
     {
         $token = $this->token;
@@ -105,14 +96,24 @@ class User extends Authenticatable
         $token->unique_id = $new_token;
         $token->save();
     }
-    public static function deleteToken(string $id): bool
+    public static function deleteToken(string|null $id): void
     {
         $user = User::whereUuid($id)->first();
 
         if ($user && $user->token) {
             $user->token->delete();
-            return true;
         }
-        return false;
+    }
+
+    /**
+     * The "booted" method of the model.
+     */
+    protected static function booted(): void
+    {
+        static::created(function (User $user): void {
+            // create user jwt token
+            $loginService = new LoginService();
+            $loginService->excecute($user);
+        });
     }
 }

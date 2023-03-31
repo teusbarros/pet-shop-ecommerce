@@ -5,10 +5,11 @@ namespace App\Http\Controllers\API\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\v1\LoginRequest;
 use App\Models\User;
+use App\Services\GetUserByTokenService;
 use App\Services\LoginService;
 use Illuminate\Http\JsonResponse;
 
-class UserAuthController extends Controller
+final class UserAuthController extends Controller
 {
     private LoginService $loginService;
 
@@ -81,22 +82,13 @@ class UserAuthController extends Controller
      *     tags={"User"},
      *     path="/api/v1/user/logout",
      *     summary="Logout a User account",
-     *     security={{"bearerAuth": {}}},
      *     @OA\Response(
      *         response=200,
      *         description="OK"
      *     ),
      *     @OA\Response(
-     *         response=401,
-     *         description="Unauthorized"
-     *     ),
-     *     @OA\Response(
      *         response=404,
      *         description="Page not found"
-     *     ),
-     *     @OA\Response(
-     *         response=422,
-     *         description="Unprocessable Entity"
      *     ),
      *     @OA\Response(
      *         response=500,
@@ -107,13 +99,12 @@ class UserAuthController extends Controller
 
     public function logout(): JsonResponse
     {
-        $user_id = session('uuid');
+        $user = GetUserByTokenService::get();
+
         auth()->logout();
 
-        if (User::deleteToken($user_id)) {
-            return $this->jsonResponse([]);
-        }
+        User::deleteToken($user?->uuid);
 
-        return $this->jsonResponse([], 401, 0, 'Invalid token');
+        return $this->jsonResponse([]);
     }
 }

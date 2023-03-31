@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
-class AdminController extends Controller
+final class AdminController extends Controller
 {
     /**
      * @OA\Post(
@@ -29,33 +29,46 @@ class AdminController extends Controller
      *          @OA\MediaType(
      *              mediaType="application/x-www-form-urlencoded",
      *              @OA\Schema(
-     *                  required={"first_name","last_name","email","password","password_confirmation","avatar","address","phone_number"},
+     *                  required={
+     *                      "first_name","last_name","email",
+     *                      "password","password_confirmation",
+     *                      "avatar","address","phone_number"
+     *                  },
      *                  @OA\Property(
-     *                      property="first_name", type="string", description="User first name"
+     *                      property="first_name", type="string",
+     *                      description="User first name"
      *                  ),
      *                  @OA\Property(
-     *                      property="last_name", type="string", description="User last name"
+     *                      property="last_name", type="string",
+     *                      description="User last name"
      *                  ),
      *                  @OA\Property(
-     *                      property="email", type="string", description="User email"
+     *                      property="email", type="string",
+     *                      description="User email"
      *                  ),
      *                  @OA\Property(
-     *                      property="password", type="string", description="User password"
+     *                      property="password", type="string",
+     *                      description="User password"
      *                  ),
      *                  @OA\Property(
-     *                      property="password_confirmation", type="string", description="User password"
+     *                      property="password_confirmation", type="string",
+     *                      description="User password"
      *                  ),
      *                  @OA\Property(
-     *                      property="avatar", type="string", description="Avatar image UUID"
+     *                      property="avatar", type="string",
+     *                      description="Avatar image UUID"
      *                  ),
      *                  @OA\Property(
-     *                      property="address", type="string", description="User main address"
+     *                      property="address", type="string",
+     *                      description="User main address"
      *                  ),
      *                  @OA\Property(
-     *                      property="phone_number", type="string", description="User main phone number"
+     *                      property="phone_number", type="string",
+     *                      description="User main phone number"
      *                  ),
      *                  @OA\Property(
-     *                      property="marketing", type="string", description="User marketing preferences"
+     *                      property="marketing", type="string",
+     *                      description="User marketing preferences"
      *                  ),
      *              )
      *          )
@@ -190,33 +203,46 @@ class AdminController extends Controller
      *          @OA\MediaType(
      *              mediaType="application/x-www-form-urlencoded",
      *              @OA\Schema(
-     *                  required={"first_name","last_name","email","password","password_confirmation","address","phone_number"},
+     *                  required={
+     *                      "first_name","last_name","email",
+     *                      "password","password_confirmation",
+     *                      "address","phone_number"
+     *                  },
      *                  @OA\Property(
-     *                      property="first_name", type="string", description="User first name"
+     *                      property="first_name", type="string",
+     *                      description="User first name"
      *                  ),
      *                  @OA\Property(
-     *                      property="last_name", type="string", description="User last name"
+     *                      property="last_name", type="string",
+     *                      description="User last name"
      *                  ),
      *                  @OA\Property(
-     *                      property="email", type="string", description="User email"
+     *                      property="email", type="string",
+     *                      description="User email"
      *                  ),
      *                  @OA\Property(
-     *                      property="password", type="string", description="User password"
+     *                      property="password", type="string",
+     *                      description="User password"
      *                  ),
      *                  @OA\Property(
-     *                      property="password_confirmation", type="string", description="User password"
+     *                      property="password_confirmation", type="string",
+     *                      description="User password"
      *                  ),
      *                  @OA\Property(
-     *                      property="avatar", type="string", description="Avatar image UUID"
+     *                      property="avatar", type="string",
+     *                      description="Avatar image UUID"
      *                  ),
      *                  @OA\Property(
-     *                      property="address", type="string", description="User main address"
+     *                      property="address", type="string",
+     *                      description="User main address"
      *                  ),
      *                  @OA\Property(
-     *                      property="phone_number", type="string", description="User main phone number"
+     *                      property="phone_number", type="string",
+     *                      description="User main phone number"
      *                  ),
      *                  @OA\Property(
-     *                      property="marketing", type="string", description="User marketing preferences"
+     *                      property="marketing", type="string",
+     *                      description="User marketing preferences"
      *                  ),
      *              )
      *          )

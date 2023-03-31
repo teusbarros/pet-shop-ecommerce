@@ -3,11 +3,11 @@
 namespace App\Http\Requests\v1;
 
 use App\Traits\DefaultResponse;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class CreateAdminRequest extends FormRequest
+final class CreateAdminRequest extends FormRequest
 {
     use DefaultResponse;
     /**
@@ -38,8 +38,7 @@ class CreateAdminRequest extends FormRequest
         ];
     }
 
-
-    protected function failedValidation(Validator $validator)
+    protected function failedValidation(Validator $validator): void
     {
         throw new HttpResponseException($this->jsonResponse([], 422, 0, 'Failed Validation', $validator->messages()->get('*')));
     }

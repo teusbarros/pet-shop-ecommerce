@@ -5,10 +5,11 @@ namespace App\Http\Controllers\API\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\v1\LoginRequest;
 use App\Models\User;
+use App\Services\GetUserByTokenService;
 use App\Services\LoginService;
 use Illuminate\Http\JsonResponse;
 
-class AdminAuthController extends Controller
+final class AdminAuthController extends Controller
 {
     private LoginService $loginService;
 
@@ -28,10 +29,12 @@ class AdminAuthController extends Controller
      *              @OA\Schema(
      *                  required={"email","password"},
      *                  @OA\Property(
-     *                      property="email", type="string", description="Admin email"
+     *                      property="email", type="string",
+     *                      description="Admin email"
      *                  ),
      *                  @OA\Property(
-     *                      property="password", type="string", description="Admin password"
+     *                      property="password", type="string",
+     *                      description="Admin password"
      *                  ),
      *              )
      *          )
@@ -77,22 +80,13 @@ class AdminAuthController extends Controller
      *     tags={"Admin"},
      *     path="/api/v1/admin/logout",
      *     summary="Logout a Admin account",
-     *     security={{"bearerAuth": {}}},
      *     @OA\Response(
      *         response=200,
      *         description="OK"
      *     ),
      *     @OA\Response(
-     *         response=401,
-     *         description="Unauthorized"
-     *     ),
-     *     @OA\Response(
      *         response=404,
      *         description="Page not found"
-     *     ),
-     *     @OA\Response(
-     *         response=422,
-     *         description="Unprocessable Entity"
      *     ),
      *     @OA\Response(
      *         response=500,
@@ -103,13 +97,12 @@ class AdminAuthController extends Controller
 
     public function logout(): JsonResponse
     {
-        $user_id = session('uuid');
+        $user = GetUserByTokenService::get();
+
         auth()->logout();
 
-        if (User::deleteToken($user_id)) {
-            return $this->jsonResponse([]);
-        }
+        User::deleteToken($user?->uuid);
 
-        return $this->jsonResponse([], 401, 0, 'Invalid token');
+        return $this->jsonResponse([]);
     }
 }

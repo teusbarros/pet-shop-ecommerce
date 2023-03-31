@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Models\User;
 use Firebase\JWT\JWT;
 
-class LoginService
+final class LoginService
 {
     public const MAX_TIME = 60 * 60 * 1; // 1 hour
 
