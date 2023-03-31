@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Services\LoginService;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -59,6 +60,14 @@ class User extends Authenticatable
             $loginService = new LoginService();
             $loginService->excecute($user);
         });
+    }
+    public function scopeNotAdmin(Builder $query): void
+    {
+        $query->where('is_admin', 0);
+    }
+    public function scopeIsAdmin(Builder $query): void
+    {
+        $query->where('is_admin', 1);
     }
     public function token(): HasOne
     {
