@@ -3,11 +3,11 @@
 namespace App\Http\Requests\v1;
 
 use App\Traits\DefaultResponse;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class CreateAdminRequest extends FormRequest
+class EditUserRequest extends FormRequest
 {
     use DefaultResponse;
     /**
@@ -28,7 +28,7 @@ class CreateAdminRequest extends FormRequest
         return [
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email|unique:users,email,' . $this->user->id,
             'password' => 'required|confirmed|min:8',
             'password_confirmation' => 'required',
             'avatar' => 'nullable',
@@ -37,7 +37,6 @@ class CreateAdminRequest extends FormRequest
             'marketing' => 'nullable',
         ];
     }
-
 
     protected function failedValidation(Validator $validator)
     {

@@ -11,7 +11,7 @@ Route::middleware([APIMiddleware::class])->group(function () {
     Route::group(['prefix' => 'v1/admin'], function (){
         Route::get('logout', [AdminAuthController::class, 'logout']);
         Route::post('create', [AdminController::class, 'create']);
-        Route::put('user-edit/{uuid}', [AdminController::class, 'edit']);
+        Route::put('user-edit/{user}', [AdminController::class, 'edit']);
         Route::delete('user-delete/{uuid}', [AdminController::class, 'destroy']);
         Route::get('user-listing', [AdminController::class, 'index']);
     });

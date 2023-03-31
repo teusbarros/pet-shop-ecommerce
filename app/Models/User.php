@@ -69,6 +69,12 @@ class User extends Authenticatable
     {
         $query->where('is_admin', 1);
     }
+
+    public function getRouteKeyName(): string
+    {
+        return 'uuid';
+    }
+
     public function token(): HasOne
     {
         return $this->hasOne(Token::class, 'user_id', 'uuid');

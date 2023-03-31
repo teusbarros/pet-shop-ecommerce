@@ -4,8 +4,10 @@ namespace App\Http\Controllers\API\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\v1\CreateAdminRequest;
+use App\Http\Requests\v1\EditUserRequest;
 use App\Http\Resources\v1\AdminResource;
 use App\Http\Resources\v1\UserCollection;
+use App\Http\Resources\v1\UserResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -48,5 +50,15 @@ class AdminController extends Controller
 
 
         return new UserCollection($users);
+    }
+    public function edit(User $user, EditUserRequest $request): JsonResponse
+    {
+        if ($user->is_admin){
+            return $this->jsonResponse([], 403, 0, 'Unauthorized: Not enough privileges');
+        }
+
+        $user->update($request->all());
+
+        return $this->jsonResponse(new UserResource($user));
     }
 }
