@@ -2,15 +2,21 @@
 
 namespace App\Services;
 
+use App\Models\User;
 use Firebase\JWT\JWT;
 
-class LoginService {
+class LoginService
+{
+    public const MAX_TIME = 60 * 60 * 1; // 1 hour
 
-    const MAX_TIME = 60 * 60 * 1; // 1 hour
+    public const ALLOWED_ALGOS = 'RS256';
 
-    const ALLOWED_ALGOS = 'RS256';
-
-    public function excecute($user): string
+    /**
+     * @param User $user
+     *
+     * @return string
+     */
+    public function excecute(User $user): string
     {
         $payload = [
             'iss' => env('APP_URL'),

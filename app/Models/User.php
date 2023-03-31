@@ -55,16 +55,28 @@ class User extends Authenticatable
      */
     protected static function booted(): void
     {
-        static::created(function (User $user) {
+        static::created(function (User $user): void
+        {
             // create user jwt token
             $loginService = new LoginService();
             $loginService->excecute($user);
         });
     }
+
+    /**
+     * @param Builder<User> $query
+     *
+     * @return void
+     */
     public function scopeNotAdmin(Builder $query): void
     {
         $query->where('is_admin', 0);
     }
+    /**
+     * @param Builder<User> $query
+     *
+     * @return void
+     */
     public function scopeIsAdmin(Builder $query): void
     {
         $query->where('is_admin', 1);
@@ -74,7 +86,9 @@ class User extends Authenticatable
     {
         return 'uuid';
     }
-
+    /**
+     * @return HasOne<Token>
+     */
     public function token(): HasOne
     {
         return $this->hasOne(Token::class, 'user_id', 'uuid');
@@ -83,7 +97,7 @@ class User extends Authenticatable
     {
         $token = $this->token;
 
-        if (!$token){
+        if (! $token) {
             $token = new Token();
             $token->user_id = $this->uuid;
             $token->token_title = $this->first_name;
@@ -91,11 +105,11 @@ class User extends Authenticatable
         $token->unique_id = $new_token;
         $token->save();
     }
-    public static function deleteToken($id): bool
+    public static function deleteToken(string $id): bool
     {
-        $user = (new static)::whereUuid($id)->first();
+        $user = User::whereUuid($id)->first();
 
-        if ($user && $user->token){
+        if ($user && $user->token) {
             $user->token->delete();
             return true;
         }

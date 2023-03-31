@@ -10,15 +10,12 @@ use Illuminate\Http\JsonResponse;
 
 class AdminAuthController extends Controller
 {
-
-    private object $loginService;
+    private LoginService $loginService;
 
     public function __construct(LoginService $loginService)
     {
         $this->loginService = $loginService;
     }
-
-
     /**
      * @OA\Post(
      *     tags={"Admin"},
@@ -67,14 +64,13 @@ class AdminAuthController extends Controller
         $credentials['is_admin'] = true;
 
         if (auth()->attempt($credentials)) {
-            $token = $this->loginService->excecute(auth()->user());
+            /** @var \App\Models\User $user*/
+            $user = auth()->user();
+            $token = $this->loginService->excecute($user);
 
             return $this->jsonResponse(['token' => $token]);
-
-        }else {
-            return $this->jsonResponse([], 401, 0, 'Failed to authenticate user');
         }
-
+        return $this->jsonResponse([], 401, 0, 'Failed to authenticate user');
     }
     /**
      * @OA\Get(
@@ -110,8 +106,9 @@ class AdminAuthController extends Controller
         $user_id = session('uuid');
         auth()->logout();
 
-        if(User::deleteToken($user_id))
+        if (User::deleteToken($user_id)) {
             return $this->jsonResponse([]);
+        }
 
         return $this->jsonResponse([], 401, 0, 'Invalid token');
     }

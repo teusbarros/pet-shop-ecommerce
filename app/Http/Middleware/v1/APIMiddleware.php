@@ -6,7 +6,7 @@ use App\Services\VerifyJWTService;
 use App\Traits\DefaultResponse;
 use Closure;
 use Firebase\JWT\ExpiredException;
-use http\Exception\UnexpectedValueException;
+use UnexpectedValueException;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 class APIMiddleware
@@ -15,12 +15,12 @@ class APIMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         try {
-            VerifyJWTService::excecute($request->bearerToken() ?? '');
+            VerifyJWTService::excecute($request->bearerToken());
 
             return $next($request);
-        }catch (ExpiredException $e){
+        } catch (ExpiredException $e) {
             return $this->jsonResponse([], 401, 0, $e->getMessage());
-        }catch (UnexpectedValueException $e){
+        } catch (UnexpectedValueException $e) {
             return $this->jsonResponse([], 422, 0, $e->getMessage());
         }
     }

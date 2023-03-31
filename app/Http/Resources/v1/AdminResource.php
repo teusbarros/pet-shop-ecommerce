@@ -5,12 +5,16 @@ namespace App\Http\Resources\v1;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/** @mixin \App\Models\User */
+
 class AdminResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
      * @return array<string, mixed>
+     *
+     * @extends JsonResource<User>
      */
     public function toArray(Request $request): array
     {
@@ -23,7 +27,7 @@ class AdminResource extends JsonResource
             'phone_number' => $this->phone_number,
             'updated_at' => $this->updated_at,
             'created_at' => $this->created_at,
-            'token' => $this->token()->first()->unique_id,
+            'token' => $this->token()->first()->unique_id, // @phpstan-ignore-line
         ];
     }
 }

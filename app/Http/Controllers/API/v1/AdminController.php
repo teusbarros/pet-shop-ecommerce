@@ -18,7 +18,6 @@ use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
-
     /**
      * @OA\Post(
      *     tags={"Admin"},
@@ -92,12 +91,7 @@ class AdminController extends Controller
 
         $user = User::create($dataForm);
 
-        if ($user){
-            return $this->jsonResponse(new AdminResource($user));
-        }else{
-            return $this->jsonResponse([], 422);
-        }
-
+        return $this->jsonResponse(new AdminResource($user));
     }
     /**
      * @OA\Get(
@@ -163,16 +157,16 @@ class AdminController extends Controller
     {
         $sort_by = $request->sort_by ?? null;
         $limit = $request->limit ?? null;
-        $desc = $request->desc === "true";
-        $to_sort = Schema::hasColumn((new User)->getTable(), $sort_by);
+        $desc = $request->desc === 'true';
+        $to_sort = Schema::hasColumn((new User())->getTable(), $sort_by);
 
         $users = User::notAdmin()
-            ->when($to_sort, function ($query) use ($sort_by, $desc){
-                if ($desc)
+            ->when($to_sort, function ($query) use ($sort_by, $desc) {
+                if ($desc) {
                     return $query->orderBy($sort_by, 'desc');
+                }
                 return $query->orderBy($sort_by);
             })->paginate($limit);
-
 
         return new UserCollection($users);
     }
@@ -251,7 +245,7 @@ class AdminController extends Controller
      */
     public function edit(User $user, EditUserRequest $request): JsonResponse
     {
-        if ($user->is_admin){
+        if ($user->is_admin) {
             return $this->jsonResponse([], 403, 0, 'Unauthorized: Not enough privileges');
         }
 
@@ -300,7 +294,7 @@ class AdminController extends Controller
 
     public function destroy(User $user): JsonResponse
     {
-        if ($user->is_admin){
+        if ($user->is_admin) {
             return $this->jsonResponse([], 401, 0, 'Unauthorized: Not enough privileges');
         }
 

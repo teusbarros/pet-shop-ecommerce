@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/** @phpstan-consistent-constructor */
 class Token extends Model
 {
     use HasFactory;
@@ -21,13 +22,16 @@ class Token extends Model
         'refreshed_at',
     ];
 
+    /**
+     * @return BelongsTo<User, Token>
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'uuid');
     }
 
-    public static function validatePayload($token): bool
+    public static function validatePayload(string $token): bool
     {
-        return (new static)::where('unique_id', $token)->count() == 1;
+        return Token::where('unique_id', $token)->count() == 1;
     }
 }
