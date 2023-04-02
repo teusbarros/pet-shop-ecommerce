@@ -7,7 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 /** @mixin \App\Models\Category */
 
-class CategoryResource extends JsonResource
+final class CategoryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

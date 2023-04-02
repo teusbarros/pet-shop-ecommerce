@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /** @mixin \App\Models\Promotion */
-class PromotionResource extends JsonResource
+final class PromotionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

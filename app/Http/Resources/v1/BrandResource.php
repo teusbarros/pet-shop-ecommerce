@@ -7,7 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 /** @mixin \App\Models\Brand */
 
-class BrandResource extends JsonResource
+final class BrandResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

@@ -80,14 +80,14 @@ class CategoryController extends Controller
         $desc = $request->desc === 'true';
         $to_sort = Schema::hasColumn((new Category())->getTable(), $sort_by);
 
-        $promotions = Category::when($to_sort, function ($query) use ($sort_by, $desc) {
+        $categories = Category::when($to_sort, function ($query) use ($sort_by, $desc) {
             if ($desc) {
                 return $query->orderBy($sort_by, 'desc');
             }
             return $query->orderBy($sort_by);
         })->paginate($limit);
 
-        return new CategoryCollection($promotions);
+        return new CategoryCollection($categories);
     }
 
     /**
