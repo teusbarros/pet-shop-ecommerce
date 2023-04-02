@@ -23,7 +23,6 @@ final class AdminController extends Controller
      *     tags={"Admin"},
      *     path="/api/v1/admin/create",
      *     summary="Create a Admin account",
-     *     security={{"bearerAuth": {}}},
      *     @OA\RequestBody(
      *          required=true,
      *          @OA\MediaType(
@@ -110,7 +109,7 @@ final class AdminController extends Controller
      * @OA\Get(
      *     tags={"Admin"},
      *     path="/api/v1/admin/user-listing",
-     *     summary="Create a Admin account",
+     *     summary="List all users",
      *     security={{"bearerAuth": {}}},
      *     @OA\Parameter(
      *         name="page",
@@ -272,7 +271,12 @@ final class AdminController extends Controller
     public function edit(User $user, EditUserRequest $request): JsonResponse
     {
         if ($user->is_admin) {
-            return $this->jsonResponse([], 403, 0, 'Unauthorized: Not enough privileges');
+            return $this->jsonResponse(
+                [],
+                403,
+                0,
+                'Unauthorized: Not enough privileges'
+            );
         }
 
         $user->update($request->all());
@@ -321,7 +325,12 @@ final class AdminController extends Controller
     public function destroy(User $user): JsonResponse
     {
         if ($user->is_admin) {
-            return $this->jsonResponse([], 401, 0, 'Unauthorized: Not enough privileges');
+            return $this->jsonResponse(
+                [],
+                401,
+                0,
+                'Unauthorized: Not enough privileges'
+            );
         }
 
         $user->token?->delete();

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/v1/admin/login', [AdminAuthController::class, 'login']);
 Route::get('/v1/admin/logout', [AdminAuthController::class, 'logout']);
+Route::post('/v1/admin/create', [AdminController::class, 'create']);
 
 Route::post('/v1/user/login', [UserAuthController::class, 'login']);
 Route::get('/v1/user/logout', [UserAuthController::class, 'logout']);
@@ -38,7 +39,6 @@ Route::get('v1/product/{uuid}', [ProductController::class, 'show']);
 Route::middleware([APIMiddleware::class])->prefix('v1/')->group(function (): void {
     // only admin
     Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function (): void {
-        Route::post('create', [AdminController::class, 'create']);
         Route::put('user-edit/{user}', [AdminController::class, 'edit']);
         Route::delete('user-delete/{user}', [AdminController::class, 'destroy']);
         Route::get('user-listing', [AdminController::class, 'index']);
