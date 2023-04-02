@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\v1\AdminAuthController;
 use App\Http\Controllers\API\v1\AdminController;
+use App\Http\Controllers\API\v1\BrandController;
 use App\Http\Controllers\API\v1\CategoryController;
 use App\Http\Controllers\API\v1\MainPageController;
 use App\Http\Controllers\API\v1\UserAuthController;
@@ -27,13 +28,18 @@ Route::get('/v1/main/blog/{post}', [MainPageController::class, 'blog']);
 Route::get('v1/categories', [CategoryController::class, 'index']);
 Route::get('v1/category/{category}', [CategoryController::class, 'show']);
 
+Route::get('v1/brands', [BrandController::class, 'index']);
+Route::get('v1/brand/{category}', [BrandController::class, 'show']);
+
 Route::middleware([APIMiddleware::class])->prefix('v1/')->group(function (): void {
+    // only admin
     Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function (): void {
         Route::post('create', [AdminController::class, 'create']);
         Route::put('user-edit/{user}', [AdminController::class, 'edit']);
         Route::delete('user-delete/{user}', [AdminController::class, 'destroy']);
         Route::get('user-listing', [AdminController::class, 'index']);
     });
+    // only non admin
     Route::middleware([NotAdminMiddleware::class])->prefix('user')->group(function (): void {
         Route::get('/', [UserController::class, 'show']);
         Route::delete('/', [UserController::class, 'destroy']);
@@ -41,9 +47,16 @@ Route::middleware([APIMiddleware::class])->prefix('v1/')->group(function (): voi
         Route::put('edit', [UserController::class, 'edit']);
         Route::delete('delete', [UserController::class, 'destroy']);
     });
+
+    // both
     Route::prefix('category')->group(function (): void {
         Route::post('create', [CategoryController::class, 'create']);
         Route::put('{category}', [CategoryController::class, 'edit']);
         Route::delete('{category}', [CategoryController::class, 'destroy']);
+    });
+    Route::prefix('brand')->group(function (): void {
+        Route::post('create', [BrandController::class, 'create']);
+        Route::put('{brand}', [BrandController::class, 'edit']);
+        Route::delete('{brand}', [BrandController::class, 'destroy']);
     });
 });

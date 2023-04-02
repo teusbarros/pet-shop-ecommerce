@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Http\Resources\v1\AdminResource;
+use App\Http\Resources\v1\BrandResource;
 use App\Http\Resources\v1\CategoryResource;
 use App\Http\Resources\v1\PostResource;
 use App\Http\Resources\v1\UserResource;
@@ -20,7 +21,7 @@ trait DefaultResponse
      *
      * @return JsonResponse
      */
-    public function jsonResponse(array|null|AdminResource|UserResource|CategoryResource|PostResource $data, int $code = 200, int $success = 1, string $error = null, array $errors = [], array $extra = []): JsonResponse
+    public function jsonResponse(array|null|AdminResource|UserResource|CategoryResource|PostResource|BrandResource $data, int $code = 200, int $success = 1, string $error = null, array $errors = [], array $extra = []): JsonResponse
     {
         return response()->json([
             'success' => $success,
