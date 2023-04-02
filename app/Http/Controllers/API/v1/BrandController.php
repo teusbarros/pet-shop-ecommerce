@@ -122,4 +122,46 @@ class BrandController extends Controller
 
         return $this->jsonResponse(new BrandResource($brand));
     }
+
+    /**
+     * @OA\Get(
+     *     tags={"Brands"},
+     *     path="/api/v1/brand/{uuid}",
+     *     summary="Fetch a brand",
+     *     @OA\Parameter(
+     *         name="uuid",
+     *         required=true,
+     *         in="path",
+     *         description="",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK"
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Page not found"
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Unprocessable Entity"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error"
+     *     ),
+     * )
+     */
+    public function show(Brand $brand): JsonResponse
+    {
+        info($brand);
+        return $this->jsonResponse(new BrandResource($brand));
+    }
 }

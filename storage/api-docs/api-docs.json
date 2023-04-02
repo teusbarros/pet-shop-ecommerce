@@ -421,6 +421,41 @@
             }
         },
         "/api/v1/brand/{uuid}": {
+            "get": {
+                "tags": [
+                    "Brands"
+                ],
+                "summary": "Fetch a brand",
+                "operationId": "14a5d325ec2050a17b48c59476526d49",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
             "put": {
                 "tags": [
                     "Brands"

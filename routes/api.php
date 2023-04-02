@@ -29,7 +29,7 @@ Route::get('v1/categories', [CategoryController::class, 'index']);
 Route::get('v1/category/{category}', [CategoryController::class, 'show']);
 
 Route::get('v1/brands', [BrandController::class, 'index']);
-Route::get('v1/brand/{category}', [BrandController::class, 'show']);
+Route::get('v1/brand/{brand}', [BrandController::class, 'show']);
 
 Route::middleware([APIMiddleware::class])->prefix('v1/')->group(function (): void {
     // only admin
