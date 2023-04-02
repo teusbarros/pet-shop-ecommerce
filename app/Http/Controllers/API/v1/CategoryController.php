@@ -12,11 +12,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
-class CategoryController extends Controller
+final class CategoryController extends Controller
 {
     /**
      * @OA\Get(
-     *     tags={"Category"},
+     *     tags={"Categories"},
      *     path="/api/v1/categories",
      *     summary="List all categories",
      *     @OA\Parameter(
@@ -92,7 +92,7 @@ class CategoryController extends Controller
 
     /**
      * @OA\Post(
-     *     tags={"Category"},
+     *     tags={"Categories"},
      *     path="/api/v1/category/create",
      *     summary="Create a new category",
      *     security={{"bearerAuth": {}}},
@@ -144,7 +144,7 @@ class CategoryController extends Controller
 
     /**
      * @OA\Put(
-     *     tags={"Category"},
+     *     tags={"Categories"},
      *     path="/api/v1/category/{uuid}",
      *     summary="Update an existing category",
      *     security={{"bearerAuth": {}}},
@@ -204,7 +204,7 @@ class CategoryController extends Controller
 
     /**
      * @OA\Get(
-     *     tags={"Category"},
+     *     tags={"Categories"},
      *     path="/api/v1/category/{uuid}",
      *     summary="Fetch a category",
      *     @OA\Parameter(
@@ -245,7 +245,7 @@ class CategoryController extends Controller
 
     /**
      * @OA\Delete(
-     *     tags={"Category"},
+     *     tags={"Categories"},
      *     path="/api/v1/category/{uuid}",
      *     summary="Delete an existing category",
      *     security={{"bearerAuth": {}}},

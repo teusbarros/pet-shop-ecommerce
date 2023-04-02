@@ -614,7 +614,7 @@
         "/api/v1/categories": {
             "get": {
                 "tags": [
-                    "Category"
+                    "Categories"
                 ],
                 "summary": "List all categories",
                 "operationId": "efed627f479288a141985281b1f9ac5f",
@@ -674,7 +674,7 @@
         "/api/v1/category/create": {
             "post": {
                 "tags": [
-                    "Category"
+                    "Categories"
                 ],
                 "summary": "Create a new category",
                 "operationId": "aac97222a2397b25a3185cd21b8dcb4a",
@@ -724,7 +724,7 @@
         "/api/v1/category/{uuid}": {
             "get": {
                 "tags": [
-                    "Category"
+                    "Categories"
                 ],
                 "summary": "Fetch a category",
                 "operationId": "41cb7800bf975262790a700cd8756c29",
@@ -759,7 +759,7 @@
             },
             "put": {
                 "tags": [
-                    "Category"
+                    "Categories"
                 ],
                 "summary": "Update an existing category",
                 "operationId": "4abbffadda78ec92680e6ed94059735d",
@@ -818,7 +818,7 @@
             },
             "delete": {
                 "tags": [
-                    "Category"
+                    "Categories"
                 ],
                 "summary": "Delete an existing category",
                 "operationId": "ee8f1e2b2acfb7237cbe7f9d59d81293",
@@ -1735,7 +1735,7 @@
             "description": "MainPage API endpoint"
         },
         {
-            "name": "Category",
+            "name": "Categories",
             "description": "Categories API endpoint"
         },
         {

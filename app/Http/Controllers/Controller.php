@@ -32,7 +32,7 @@ use Illuminate\Routing\Controller as BaseController;
  * )
  *
  * @OA\Tag(
- *     name="Category",
+ *     name="Categories",
  *     description="Categories API endpoint",
  * )
  *
