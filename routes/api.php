@@ -27,7 +27,6 @@ Route::get('/v1/main/blog/{post}', [MainPageController::class, 'blog']);
 Route::get('v1/categories', [CategoryController::class, 'index']);
 Route::get('v1/category/{category}', [CategoryController::class, 'show']);
 
-
 Route::middleware([APIMiddleware::class])->prefix('v1/')->group(function (): void {
     Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function (): void {
         Route::post('create', [AdminController::class, 'create']);
@@ -42,7 +41,6 @@ Route::middleware([APIMiddleware::class])->prefix('v1/')->group(function (): voi
         Route::put('edit', [UserController::class, 'edit']);
         Route::delete('delete', [UserController::class, 'destroy']);
     });
-
     Route::prefix('category')->group(function (): void {
         Route::post('create', [CategoryController::class, 'create']);
         Route::put('{category}', [CategoryController::class, 'edit']);
