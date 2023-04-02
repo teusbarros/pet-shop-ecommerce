@@ -33,7 +33,7 @@ Route::get('v1/brands', [BrandController::class, 'index']);
 Route::get('v1/brand/{brand}', [BrandController::class, 'show']);
 
 Route::get('v1/products', [ProductController::class, 'index']);
-Route::get('v1/product/{product}', [ProductController::class, 'show']);
+Route::get('v1/product/{uuid}', [ProductController::class, 'show']);
 
 Route::middleware([APIMiddleware::class])->prefix('v1/')->group(function (): void {
     // only admin
@@ -65,7 +65,7 @@ Route::middleware([APIMiddleware::class])->prefix('v1/')->group(function (): voi
     });
     Route::prefix('product')->group(function (): void {
         Route::post('create', [ProductController::class, 'create']);
-        Route::put('{product}', [ProductController::class, 'edit']);
-        Route::delete('{product}', [ProductController::class, 'destroy']);
+        Route::put('{uuid}', [ProductController::class, 'edit']);
+        Route::delete('{uuid}', [ProductController::class, 'destroy']);
     });
 });

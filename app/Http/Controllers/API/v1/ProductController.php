@@ -4,14 +4,92 @@ namespace App\Http\Controllers\API\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\v1\CreateProductRequest;
+use App\Http\Resources\v1\ProductCollection;
 use App\Http\Resources\v1\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
-class ProductController extends Controller
+final class ProductController extends Controller
 {
+    /**
+     * @OA\Get(
+     *     tags={"Products"},
+     *     path="/api/v1/products",
+     *     summary="List all products",
+     *     @OA\Parameter(
+     *         name="page",
+     *         required=false,
+     *         in="query",
+     *         @OA\Schema(
+     *             type="int"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="limit",
+     *         required=false,
+     *         in="query",
+     *         @OA\Schema(
+     *             type="int"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="sort_by",
+     *         required=false,
+     *         in="query",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="desc",
+     *         required=false,
+     *         in="query",
+     *         @OA\Schema(
+     *             type="boolean"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK"
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Page not found"
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Unprocessable Entity"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error"
+     *     ),
+     * )
+     */
+    public function index(Request $request): ProductCollection
+    {
+        $sort_by = $request->sort_by ?? null;
+        $limit = $request->limit ?? null;
+        $desc = $request->desc === 'true';
+        $to_sort = Schema::hasColumn((new Product())->getTable(), $sort_by);
+
+        $products = Product::withTrashed()->when($to_sort, function ($query) use ($sort_by, $desc) {
+            if ($desc) {
+                return $query->orderBy($sort_by, 'desc');
+            }
+            return $query->orderBy($sort_by);
+        })->paginate($limit);
+
+        return new ProductCollection($products);
+    }
+
     /**
      * @OA\Post(
      *     tags={"Products"},
@@ -145,8 +223,10 @@ class ProductController extends Controller
      *     ),
      * )
      */
-    public function edit(Product $product, CreateProductRequest $request): JsonResponse
+    public function edit(string $uuid, CreateProductRequest $request): JsonResponse
     {
+        // no data binding 'cause of softdelete
+        $product = Product::withTrashed()->whereUuid($uuid)->firstOrFail();
         $product->title = $request->title;
         $product->description = $request->description;
         $product->price = $request->price;
@@ -192,8 +272,11 @@ class ProductController extends Controller
      *     ),
      * )
      */
-    public function show(Product $product): JsonResponse
+    public function show(string $uuid): JsonResponse
     {
+        // no data binding 'cause of softdelete
+        $product = Product::withTrashed()->whereUuid($uuid)->firstOrFail();
+
         return $this->jsonResponse(new ProductResource($product));
     }
 
@@ -234,8 +317,11 @@ class ProductController extends Controller
      *     ),
      * )
      */
-    public function destroy(Product $product): JsonResponse
+    public function destroy(string $uuid): JsonResponse
     {
+        // no data binding 'cause of softdelete
+        $product = Product::withTrashed()->whereUuid($uuid)->firstOrFail();
+
         $product->delete();
 
         return $this->jsonResponse([]);
