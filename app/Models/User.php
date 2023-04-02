@@ -3,11 +3,14 @@
 namespace App\Models;
 
 use App\Services\LoginService;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 final class User extends Authenticatable
 {
@@ -105,6 +108,20 @@ final class User extends Authenticatable
         }
     }
 
+    public function getNewResetPasswordToken(): string
+    {
+        // check for existing one
+        $token = ResetPasswordToken::find($this->email);
+
+        if (! $token) {
+            $token = ResetPasswordToken::create([
+                'email' => $this->email,
+                'token' => Hash::make(Str::random()),
+                'created_at' => Carbon::now(),
+            ]);
+        }
+        return $token->token;
+    }
     /**
      * The "booted" method of the model.
      */

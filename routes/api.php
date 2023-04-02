@@ -14,6 +14,8 @@ Route::get('/v1/admin/logout', [AdminAuthController::class, 'logout']);
 
 Route::post('/v1/user/login', [UserAuthController::class, 'login']);
 Route::get('/v1/user/logout', [UserAuthController::class, 'logout']);
+Route::post('/v1/user/forgot-password', [UserAuthController::class, 'forgot']);
+Route::post('/v1/user/reset-password-token', [UserAuthController::class, 'reset']);
 
 Route::middleware([APIMiddleware::class])->prefix('v1/')->group(function (): void {
     Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function (): void {
