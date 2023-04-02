@@ -163,4 +163,48 @@ class CategoryController extends Controller
     {
         return $this->jsonResponse(new CategoryResource($category));
     }
+
+    /**
+     * @OA\Delete(
+     *     tags={"Category"},
+     *     path="/api/v1/category/{uuid}",
+     *     summary="Delete an existing category",
+     *     security={{"bearerAuth": {}}},
+     *     @OA\Parameter(
+     *         name="uuid",
+     *         required=true,
+     *         in="path",
+     *         description="",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK"
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Page not found"
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Unprocessable Entity"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error"
+     *     ),
+     * )
+     */
+    public function destroy(Category $category): JsonResponse
+    {
+        $category->delete();
+
+        return $this->jsonResponse([]);
+    }
 }

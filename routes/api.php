@@ -40,6 +40,7 @@ Route::middleware([APIMiddleware::class])->prefix('v1/')->group(function (): voi
     });
 
     Route::prefix('category')->group(function (): void {
+        Route::delete('{category}', [CategoryController::class, 'destroy']);
         Route::post('create', [CategoryController::class, 'create']);
         Route::put('{category}', [CategoryController::class, 'edit']);
         Route::get('{category}', [CategoryController::class, 'show']);
