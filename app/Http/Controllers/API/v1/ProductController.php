@@ -101,7 +101,10 @@ final class ProductController extends Controller
      *          @OA\MediaType(
      *              mediaType="application/x-www-form-urlencoded",
      *              @OA\Schema(
-     *                  required={"category_uuid", "title", "price", "description", "metadata"},
+     *                  required={
+     *                      "category_uuid", "title",
+     *                      "price", "description", "metadata"
+     *                  },
      *                  @OA\Property(
      *                      property="category_uuid", type="string",
      *                      description="Category UUID"
@@ -177,7 +180,10 @@ final class ProductController extends Controller
      *          @OA\MediaType(
      *              mediaType="application/x-www-form-urlencoded",
      *              @OA\Schema(
-     *                  required={"category_uuid", "title", "price", "description", "metadata"},
+     *                  required={
+     *                      "category_uuid", "title",
+     *                      "price", "description", "metadata"
+     *                  },
      *                  @OA\Property(
      *                      property="category_uuid", type="string",
      *                      description="Category UUID"
