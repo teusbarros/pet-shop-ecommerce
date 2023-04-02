@@ -78,4 +78,83 @@ class ProductController extends Controller
 
         return $this->jsonResponse(new ProductResource($product));
     }
+
+    /**
+     * @OA\Put(
+     *     tags={"Products"},
+     *     path="/api/v1/product/{uuid}",
+     *     summary="Update an existing product",
+     *     security={{"bearerAuth": {}}},
+     *     @OA\Parameter(
+     *         name="uuid",
+     *         required=true,
+     *         in="path",
+     *         description="",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *          required=true,
+     *          @OA\MediaType(
+     *              mediaType="application/x-www-form-urlencoded",
+     *              @OA\Schema(
+     *                  required={"category_uuid", "title", "price", "description", "metadata"},
+     *                  @OA\Property(
+     *                      property="category_uuid", type="string",
+     *                      description="Category UUID"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="title", type="string",
+     *                      description="Product title"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="price", type="number",
+     *                      description="Product price"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="description", type="string",
+     *                      description="Product description"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="metadata", type="object",
+     *                      description="Product metadata"
+     *                  ),
+     *              )
+     *          )
+     *      ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK"
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Page not found"
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Unprocessable Entity"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error"
+     *     ),
+     * )
+     */
+    public function edit(Product $product, CreateProductRequest $request): JsonResponse
+    {
+        $product->title = $request->title;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->metadata = $request->metadata;
+
+        $product->save();
+
+        return $this->jsonResponse(new ProductResource($product));
+    }
+
 }
