@@ -40,6 +40,11 @@ use Illuminate\Routing\Controller as BaseController;
  *     name="Brands",
  *     description="Brands API endpoint",
  * )
+ *
+ * @OA\Tag(
+ *     name="Products",
+ *     description="Products API endpoint",
+ * )
  */
 
 class Controller extends BaseController

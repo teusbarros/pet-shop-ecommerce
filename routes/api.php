@@ -5,6 +5,7 @@ use App\Http\Controllers\API\v1\AdminController;
 use App\Http\Controllers\API\v1\BrandController;
 use App\Http\Controllers\API\v1\CategoryController;
 use App\Http\Controllers\API\v1\MainPageController;
+use App\Http\Controllers\API\v1\ProductController;
 use App\Http\Controllers\API\v1\UserAuthController;
 use App\Http\Controllers\API\v1\UserController;
 use App\Http\Middleware\v1\AdminMiddleware;
@@ -30,6 +31,9 @@ Route::get('v1/category/{category}', [CategoryController::class, 'show']);
 
 Route::get('v1/brands', [BrandController::class, 'index']);
 Route::get('v1/brand/{brand}', [BrandController::class, 'show']);
+
+Route::get('v1/products', [ProductController::class, 'index']);
+Route::get('v1/product/{product}', [ProductController::class, 'show']);
 
 Route::middleware([APIMiddleware::class])->prefix('v1/')->group(function (): void {
     // only admin
@@ -58,5 +62,10 @@ Route::middleware([APIMiddleware::class])->prefix('v1/')->group(function (): voi
         Route::post('create', [BrandController::class, 'create']);
         Route::put('{brand}', [BrandController::class, 'edit']);
         Route::delete('{brand}', [BrandController::class, 'destroy']);
+    });
+    Route::prefix('product')->group(function (): void {
+        Route::post('create', [ProductController::class, 'create']);
+        Route::put('{product}', [ProductController::class, 'edit']);
+        Route::delete('{product}', [ProductController::class, 'destroy']);
     });
 });

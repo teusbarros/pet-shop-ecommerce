@@ -1019,6 +1019,76 @@
                 }
             }
         },
+        "/api/v1/product/create": {
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Create a new product",
+                "operationId": "c32884cf165a575091010f61aba5cb78",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "category_uuid",
+                                    "title",
+                                    "price",
+                                    "description",
+                                    "metadata"
+                                ],
+                                "properties": {
+                                    "category_uuid": {
+                                        "description": "Category UUID",
+                                        "type": "string"
+                                    },
+                                    "title": {
+                                        "description": "Product title",
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "description": "Product price",
+                                        "type": "number"
+                                    },
+                                    "description": {
+                                        "description": "Product description",
+                                        "type": "string"
+                                    },
+                                    "metadata": {
+                                        "description": "Product metadata",
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/v1/user/login": {
             "post": {
                 "tags": [
@@ -1463,6 +1533,10 @@
         {
             "name": "Brands",
             "description": "Brands API endpoint"
+        },
+        {
+            "name": "Products",
+            "description": "Products API endpoint"
         }
     ]
 }
