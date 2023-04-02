@@ -5,8 +5,8 @@ namespace App\Http\Resources\v1;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-/** @mixin \App\Models\Promotion */
-class PromotionResource extends JsonResource
+/** @mixin \App\Models\Post */
+class PostResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,6 +18,7 @@ class PromotionResource extends JsonResource
         return [
             'uuid' => $this->uuid,
             'title' => $this->title,
+            'slug' => $this->slug,
             'content' => $this->content,
             'metadata' => json_decode($this->metadata),
             'created_at' => $this->created_at,
