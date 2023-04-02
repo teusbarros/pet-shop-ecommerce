@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
-class BrandController extends Controller
+final class BrandController extends Controller
 {
     /**
      * @OA\Get(
