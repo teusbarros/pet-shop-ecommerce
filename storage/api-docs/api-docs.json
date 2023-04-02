@@ -156,12 +156,7 @@
                     "500": {
                         "description": "Internal server error"
                     }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
+                }
             }
         },
         "/api/v1/admin/user-listing": {
@@ -169,7 +164,7 @@
                 "tags": [
                     "Admin"
                 ],
-                "summary": "Create a Admin account",
+                "summary": "List all users",
                 "operationId": "546cd834a8d8e49280112668c2d5a3f3",
                 "parameters": [
                     {
@@ -1436,7 +1431,10 @@
                         "application/x-www-form-urlencoded": {
                             "schema": {
                                 "required": [
-                                    "email"
+                                    "email",
+                                    "token",
+                                    "password",
+                                    "password_confirmation"
                                 ],
                                 "properties": {
                                     "token": {
@@ -1561,7 +1559,6 @@
                                     "email",
                                     "password",
                                     "password_confirmation",
-                                    "avatar",
                                     "address",
                                     "phone_number"
                                 ],
@@ -1598,7 +1595,7 @@
                                         "description": "User main phone number",
                                         "type": "string"
                                     },
-                                    "marketing": {
+                                    "is_marketing": {
                                         "description": "User marketing preferences",
                                         "type": "string"
                                     }
@@ -1624,12 +1621,7 @@
                     "500": {
                         "description": "Internal server error"
                     }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
+                }
             }
         },
         "/api/v1/user/edit": {

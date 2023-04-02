@@ -57,7 +57,6 @@ final class UserController extends Controller
      *     tags={"User"},
      *     path="/api/v1/user/create",
      *     summary="Create a User account",
-     *     security={{"bearerAuth": {}}},
      *     @OA\RequestBody(
      *          required=true,
      *          @OA\MediaType(
@@ -66,7 +65,7 @@ final class UserController extends Controller
      *                  required={
      *                      "first_name","last_name",
      *                      "email","password",
-     *                      "password_confirmation","avatar",
+     *                      "password_confirmation",
      *                      "address","phone_number"
      *                  },
      *                  @OA\Property(
@@ -102,7 +101,7 @@ final class UserController extends Controller
      *                      description="User main phone number"
      *                  ),
      *                  @OA\Property(
-     *                      property="marketing", type="string",
+     *                      property="is_marketing", type="string",
      *                      description="User marketing preferences"
      *                  ),
      *              )

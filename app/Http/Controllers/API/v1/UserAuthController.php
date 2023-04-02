@@ -183,7 +183,10 @@ final class UserAuthController extends Controller
      *          @OA\MediaType(
      *              mediaType="application/x-www-form-urlencoded",
      *              @OA\Schema(
-     *                  required={"email"},
+     *                  required={
+     *                      "email", "token",
+     *                      "password", "password_confirmation"
+     *                  },
      *                  @OA\Property(
      *                      property="token",
      *                      type="string",
@@ -234,7 +237,7 @@ final class UserAuthController extends Controller
      */
     public function reset(UpdatePasswordRequest $request): JsonResponse
     {
-        $token = ResetPasswordToken::where([['token', $request->token], ['email', '=', $request->email]])->first();
+        $token = ResetPasswordToken::where([['token', $request->token],['email', '=', $request->email]])->first();
 
         if (! $token) {
             return $this->jsonResponse([], 404, 0, 'Invalid or expired token');

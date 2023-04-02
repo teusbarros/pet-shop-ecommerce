@@ -21,6 +21,7 @@ Route::post('/v1/user/login', [UserAuthController::class, 'login']);
 Route::get('/v1/user/logout', [UserAuthController::class, 'logout']);
 Route::post('/v1/user/forgot-password', [UserAuthController::class, 'forgot']);
 Route::post('/v1/user/reset-password-token', [UserAuthController::class, 'reset']);
+Route::post('/v1/user/create', [UserController::class, 'create']);
 
 // main page
 Route::get('/v1/main/promotions', [MainPageController::class, 'promotions']);
@@ -47,7 +48,6 @@ Route::middleware([APIMiddleware::class])->prefix('v1/')->group(function (): voi
     Route::middleware([NotAdminMiddleware::class])->prefix('user')->group(function (): void {
         Route::get('/', [UserController::class, 'show']);
         Route::delete('/', [UserController::class, 'destroy']);
-        Route::post('create', [UserController::class, 'create']);
         Route::put('edit', [UserController::class, 'edit']);
         Route::delete('delete', [UserController::class, 'destroy']);
     });
