@@ -421,6 +421,41 @@
             }
         },
         "/api/v1/category/{uuid}": {
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Fetch a category",
+                "operationId": "41cb7800bf975262790a700cd8756c29",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
             "put": {
                 "tags": [
                     "Category"
