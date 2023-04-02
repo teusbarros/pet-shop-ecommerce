@@ -30,6 +30,11 @@ use Illuminate\Routing\Controller as BaseController;
  *     name="MainPage",
  *     description="MainPage API endpoint",
  * )
+ *
+ * @OA\Tag(
+ *     name="Category",
+ *     description="Categories API endpoint",
+ * )
  */
 
 class Controller extends BaseController
