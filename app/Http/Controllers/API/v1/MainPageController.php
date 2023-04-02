@@ -4,9 +4,11 @@ namespace App\Http\Controllers\API\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\v1\PostCollection;
+use App\Http\Resources\v1\PostResource;
 use App\Http\Resources\v1\PromotionCollection;
 use App\Models\Post;
 use App\Models\Promotion;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Schema;
@@ -87,6 +89,47 @@ class MainPageController extends Controller
         })->paginate($limit);
 
         return new PostCollection($posts);
+    }
+
+    /**
+     * @OA\Get(
+     *     tags={"MainPage"},
+     *     path="/api/v1/main/blog/{uuid}",
+     *     summary="Fetch a posts",
+     *     @OA\Parameter(
+     *         name="uuid",
+     *         required=true,
+     *         in="path",
+     *         description="",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK"
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Page not found"
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Unprocessable Entity"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error"
+     *     ),
+     * )
+     */
+    public function blog(Post $post): JsonResponse
+    {
+        return $this->jsonResponse([new PostResource($post)]);
     }
 
     /**

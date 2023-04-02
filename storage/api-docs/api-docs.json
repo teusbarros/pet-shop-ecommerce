@@ -430,6 +430,43 @@
                 }
             }
         },
+        "/api/v1/main/blog/{uuid}": {
+            "get": {
+                "tags": [
+                    "MainPage"
+                ],
+                "summary": "Fetch a posts",
+                "operationId": "277e9282f979e2206849a3b5572807ff",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
         "/api/v1/main/promotions": {
             "get": {
                 "tags": [

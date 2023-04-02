@@ -21,7 +21,7 @@ Route::post('/v1/user/reset-password-token', [UserAuthController::class, 'reset'
 // main page
 Route::get('/v1/main/promotions', [MainPageController::class, 'promotions']);
 Route::get('/v1/main/blog', [MainPageController::class, 'blogs']);
-Route::get('/v1/main/blog/{blog}', [MainPageController::class, 'blog']);
+Route::get('/v1/main/blog/{post}', [MainPageController::class, 'blog']);
 
 Route::middleware([APIMiddleware::class])->prefix('v1/')->group(function (): void {
     Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function (): void {
