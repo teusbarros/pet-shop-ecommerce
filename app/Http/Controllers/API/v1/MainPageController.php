@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Schema;
 
-class MainPageController extends Controller
+final class MainPageController extends Controller
 {
     /**
      * @OA\Get(
