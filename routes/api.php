@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\v1\AdminAuthController;
 use App\Http\Controllers\API\v1\AdminController;
+use App\Http\Controllers\API\v1\CategoryController;
 use App\Http\Controllers\API\v1\MainPageController;
 use App\Http\Controllers\API\v1\UserAuthController;
 use App\Http\Controllers\API\v1\UserController;
@@ -36,5 +37,9 @@ Route::middleware([APIMiddleware::class])->prefix('v1/')->group(function (): voi
         Route::post('create', [UserController::class, 'create']);
         Route::put('edit', [UserController::class, 'edit']);
         Route::delete('delete', [UserController::class, 'destroy']);
+    });
+
+    Route::prefix('category')->group(function (): void {
+        Route::post('create', [CategoryController::class, 'create']);
     });
 });
