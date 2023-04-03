@@ -271,6 +271,10 @@ final class CategoryController extends Controller
      *         description="Page not found"
      *     ),
      *     @OA\Response(
+     *         response=409,
+     *         description="This category cannot be deleted because an existing product is using it."
+     *     ),
+     *     @OA\Response(
      *         response=422,
      *         description="Unprocessable Entity"
      *     ),
@@ -282,6 +286,9 @@ final class CategoryController extends Controller
      */
     public function destroy(Category $category): JsonResponse
     {
+        if (count($category->products)) {
+            return $this->jsonResponse([], 409, 0, "This category cannot be deleted because an existing product is using it.");
+        }
         $category->delete();
 
         return $this->jsonResponse([]);

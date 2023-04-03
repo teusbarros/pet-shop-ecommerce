@@ -843,6 +843,9 @@
                     "404": {
                         "description": "Page not found"
                     },
+                    "409": {
+                        "description": "This category cannot be deleted because an existing product is using it."
+                    },
                     "422": {
                         "description": "Unprocessable Entity"
                     },
