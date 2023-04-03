@@ -39,6 +39,10 @@ final class Token extends Model
 
     public function isExpired(): bool
     {
-        return !Carbon::createFromFormat('Y-m-d H:i:s', $this->expires_at)->isFuture();
+        /** @var string $date */
+        $date = $this->expires_at;
+        /** @var Carbon $carbon */
+        $carbon = Carbon::createFromFormat('Y-m-d H:i:s', $date);
+        return !$carbon->isFuture();
     }
 }

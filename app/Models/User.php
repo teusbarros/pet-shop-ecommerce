@@ -87,6 +87,9 @@ final class User extends Authenticatable
     {
         return $this->is_admin == 1;
     }
+    /**
+     * @param array<string, mixed> $payload
+     */
     public function updateToken(string $new_token, array $payload): void
     {
         $token = $this->token;
