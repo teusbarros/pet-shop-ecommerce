@@ -3,9 +3,9 @@
 namespace App\Services;
 
 use App\Models\Token;
+use Firebase\JWT\Key;
 use Firebase\JWT\ExpiredException;
 use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
 
 final class VerifyJWTService
 {

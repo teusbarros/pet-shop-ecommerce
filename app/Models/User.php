@@ -87,7 +87,7 @@ final class User extends Authenticatable
     {
         return $this->is_admin == 1;
     }
-    public function updateToken(string $new_token): void
+    public function updateToken(string $new_token, array $payload): void
     {
         $token = $this->token;
 
@@ -97,6 +97,7 @@ final class User extends Authenticatable
             $token->token_title = $this->first_name;
         }
         $token->unique_id = $new_token;
+        $token->expires_at = Carbon::createFromTimestamp($payload['exp']);
         $token->save();
     }
     public static function deleteToken(string|null $id): void

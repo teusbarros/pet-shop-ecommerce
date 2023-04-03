@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -32,6 +33,12 @@ final class Token extends Model
 
     public static function validatePayload(string $token): bool
     {
-        return Token::where('unique_id', $token)->count() === 1;
+        $token = Token::where('unique_id', $token)->first();
+        return $token && !$token->isExpired();
+    }
+
+    public function isExpired(): bool
+    {
+        return !Carbon::createFromFormat('Y-m-d H:i:s', $this->expires_at)->isFuture();
     }
 }
