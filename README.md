@@ -38,9 +38,10 @@ You will find the API documentation at [{base_url}/api/swagger](http://localhost
 ## Code quality
 
 This project follows the PSR-12 standard, has passed the Larastan level 8, and has the following phpinsights score:
-![Screen Shot 2023-04-04 at 18.21.37.png](..%2F..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fsx%2F24fdzf312597hw80l40j_fm80000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_ByTDbt%2FScreen%20Shot%202023-04-04%20at%2018.21.37.png)
+![Screen Shot 2023-04-04 at 19 13 02](https://user-images.githubusercontent.com/29488656/229934435-fc0a358f-bbe6-4b6a-b970-e6de513114f8.png)
 
 ## Installation:
+
 
 you can either set up the application using the given docker container or using your local environment.
 
