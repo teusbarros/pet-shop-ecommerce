@@ -13,29 +13,38 @@ use App\Http\Middleware\v1\APIMiddleware;
 use App\Http\Middleware\v1\NotAdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/v1/admin/login', [AdminAuthController::class, 'login']);
-Route::get('/v1/admin/logout', [AdminAuthController::class, 'logout']);
-Route::post('/v1/admin/create', [AdminController::class, 'create']);
+Route::prefix('v1/')->group(function (): void {
+    // admin
+    Route::post('admin/login', [AdminAuthController::class, 'login']);
+    Route::get('admin/logout', [AdminAuthController::class, 'logout']);
+    Route::post('admin/create', [AdminController::class, 'create']);
 
-Route::post('/v1/user/login', [UserAuthController::class, 'login']);
-Route::get('/v1/user/logout', [UserAuthController::class, 'logout']);
-Route::post('/v1/user/forgot-password', [UserAuthController::class, 'forgot']);
-Route::post('/v1/user/reset-password-token', [UserAuthController::class, 'reset']);
-Route::post('/v1/user/create', [UserController::class, 'create']);
+    // users
+    Route::post('user/login', [UserAuthController::class, 'login']);
+    Route::get('user/logout', [UserAuthController::class, 'logout']);
+    Route::post('user/forgot-password', [UserAuthController::class, 'forgot']);
+    Route::post('user/reset-password-token', [UserAuthController::class, 'reset']);
+    Route::post('user/create', [UserController::class, 'create']);
 
-// main page
-Route::get('/v1/main/promotions', [MainPageController::class, 'promotions']);
-Route::get('/v1/main/blog', [MainPageController::class, 'blogs']);
-Route::get('/v1/main/blog/{post}', [MainPageController::class, 'blog']);
+    // main page
+    Route::get('main/promotions', [MainPageController::class, 'promotions']);
+    Route::get('main/blog', [MainPageController::class, 'blogs']);
+    Route::get('main/blog/{post}', [MainPageController::class, 'blog']);
 
-Route::get('v1/categories', [CategoryController::class, 'index']);
-Route::get('v1/category/{category}', [CategoryController::class, 'show']);
+    // categories
+    Route::get('categories', [CategoryController::class, 'index']);
+    Route::get('category/{category}', [CategoryController::class, 'show']);
 
-Route::get('v1/brands', [BrandController::class, 'index']);
-Route::get('v1/brand/{brand}', [BrandController::class, 'show']);
+    // brands
+    Route::get('brands', [BrandController::class, 'index']);
+    Route::get('brand/{brand}', [BrandController::class, 'show']);
 
-Route::get('v1/products', [ProductController::class, 'index']);
-Route::get('v1/product/{uuid}', [ProductController::class, 'show']);
+    // products
+    Route::get('products', [ProductController::class, 'index']);
+    Route::get('product/{uuid}', [ProductController::class, 'show']);
+});
+
+
 
 Route::middleware([APIMiddleware::class])->prefix('v1/')->group(function (): void {
     // only admin

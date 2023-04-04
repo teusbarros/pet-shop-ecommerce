@@ -21,7 +21,8 @@
         "nunomaduro/larastan": "^2.0",
         "nunomaduro/phpinsights": "^2.8",
         "phpunit/phpunit": "^10.0",
-        "spatie/laravel-ignition": "^2.0"
+        "spatie/laravel-ignition": "^2.0",
+        "teusbarros/currencyexchange": "^1.0"
     },
     "autoload": {
         "psr-4": {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8545bc7337c196dfbfb1442ee8a3deb7",
+    "content-hash": "c1eec86b3752bcf9c169c02657035315",
     "packages": [
         {
             "name": "brick/math",
@@ -9975,6 +9975,55 @@
                 }
             ],
             "time": "2023-02-24T10:42:00+00:00"
+        },
+        {
+            "name": "teusbarros/currencyexchange",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/teusbarros/currency-exchange.git",
+                "reference": "244d759134451aaa66e72b718a38c71822c4420a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/teusbarros/currency-exchange/zipball/244d759134451aaa66e72b718a38c71822c4420a",
+                "reference": "244d759134451aaa66e72b718a38c71822c4420a",
+                "shasum": ""
+            },
+            "require-dev": {
+                "nunomaduro/phpinsights": "^2.8",
+                "orchestra/testbench": "^8.2",
+                "zircote/swagger-php": "^4.7"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "teusbarros\\CurrencyExchange\\CurrencyExchangeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "teusbarros\\CurrencyExchange\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mateus Barros",
+                    "email": "smateusbp@gmail.com"
+                }
+            ],
+            "description": "A currency exchange package for the Laravel framework.",
+            "support": {
+                "issues": "https://github.com/teusbarros/currency-exchange/issues",
+                "source": "https://github.com/teusbarros/currency-exchange/tree/1.0.0"
+            },
+            "time": "2023-04-04T08:49:24+00:00"
         },
         {
             "name": "theseer/tokenizer",
