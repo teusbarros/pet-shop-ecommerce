@@ -71,7 +71,7 @@ Add your private key `JWT_PRIVATE` and your public key `JWT_PUBLIC` to the `.env
 
 (If you don't want to generate a key, just past and copy the [firebase example key](https://github.com/firebase/php-jwt#example-with-rs256-openssl))
 
-For testing edit the `phpinit.xml` file adding the `DB_DATABASE`.
+For testing edit the `phpunit.xml` file adding the `DB_DATABASE`.
 
 Now just run:
 
@@ -119,8 +119,6 @@ php artisan migrate
 php artisan db:seed
 
 php artisan test
-
-php artisan serve
 ```
 The API base URL can be accessed here: [http://localhost/api/v1/](http://localhost/api/v1/)
 
